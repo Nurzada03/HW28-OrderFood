@@ -22,3 +22,15 @@ export const updateBasketItemReq = (id, basketAmount) => {
 export const deleteBasketItemReq = (id) => {
     return axiosInstance.delete(`/basketItem/${id}/delete`)
 }
+
+export const PostMealREquest = (data) => {
+    return axiosInstance.post(`/foods`, data)
+}
+
+export const deleteMealREquest = (id) => {
+    return axiosInstance.delete(`/foods/${id}`)
+}
+
+export const updateMealItemRequest = ({ id, editData }) => {
+    return axiosInstance.put(`/foods/${id}`, editData)
+}

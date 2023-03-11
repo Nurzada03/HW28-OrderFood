@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { UserRoles } from '../lib/constants/common'
-import { signUp } from '../store/auth/auth.thunk'
+import { UserRoles } from '../../lib/constants/common'
+import { signUp } from '../../store/auth/auth.thunk'
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -38,6 +38,8 @@ const SignUp = () => {
             role: UserRoles.ADMIN,
         }
         dispatch(signUp(data))
+            .unwrap()
+            .then(() => navigate('/'))
             .unwrap()
             .then(() => navigate('/'))
     }
