@@ -60,29 +60,3 @@ const StyledMuiButton = styled(MuiButton, {
         },
     },
 }))
-
-// const StyledButton = styledComponents.button`
-//   display: flex;
-//   align-items: center;
-//   gap: 0.3125rem;
-//   background: ${getBackgroundColor};
-//   color: ${getColor};
-//   border-radius: ${getBorderRadius};
-//   padding: ${getPadding};
-//   font-weight: 600;
-//   line-height: 1.5rem;
-//   border: ${getBorder};
-//   cursor: pointer;
-
-//   :hover {
-//     background: #7e2a0a;
-//     color: #fff;
-//     path {
-//       stroke: #fff;
-//     }
-//   }
-
-//   :active {
-//     background: #993108;
-//   }
-// `;

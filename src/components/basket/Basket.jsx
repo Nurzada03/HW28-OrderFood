@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import styledComponents from 'styled-components'
 import {
     deleteBasketItem,
-    submitOrder,
     updateBasketItem,
 } from '../../store/basket/basketThunk'
+import { postOrder } from '../../store/order/order.thunk'
 import { uiActions } from '../../store/UI/ui.slice'
 import BasketItem from './BasketItem'
 import TotalAmount from './TotalAmount'
@@ -31,13 +31,13 @@ const Basket = ({ onClose, open }) => {
         dispatch(updateBasketItem({ amount: amount + 1, id }))
     }
 
+    const price = {
+        totalprice: getTotalPrice(),
+    }
+
     const orderSubmitHandler = async () => {
         try {
-            await dispatch(
-                submitOrder({
-                    orderData: { items },
-                })
-            ).unwrap()
+            await dispatch(postOrder(price)).unwrap()
             dispatch(
                 uiActions.showSnackbar({
                     isOpen: true,

@@ -5,10 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from '../../store/auth/auth.thunk'
 import { getBasket } from '../../store/basket/basketThunk'
 import { uiActions } from '../../store/UI/ui.slice'
+import { withAuthModal } from '../hoc/withAuthModal'
 import Button from '../UI/Button'
 import BusketButton from './BusketButton'
 
-const Header = ({ onShowBasket }) => {
+const Header = ({ onShowBasket, showAuthModal }) => {
     const navigate = useNavigate()
     const items = useSelector((state) => state.basket.items)
     const [animationClass, setAnimationClass] = useState('')
@@ -52,15 +53,22 @@ const Header = ({ onShowBasket }) => {
     const signOutHandler = () => {
         dispatch(signOut())
     }
+    const showBasketHandler = () => {
+        if (!isAuthorized) {
+            return showAuthModal()
+        }
+        return onShowBasket()
+    }
 
     return (
         <Container>
             <Link to="/">
                 <Logo>ReactMeals</Logo>
             </Link>
+            <Button onClick={() => navigate('/orderfood')}>show orders</Button>
             <BusketButton
                 className={animationClass}
-                onClick={onShowBasket}
+                onClick={showBasketHandler}
                 count={calculateTotalAmount()}
             />
             <Button onClick={themeChangeHandler}>
@@ -75,7 +83,7 @@ const Header = ({ onShowBasket }) => {
     )
 }
 
-export default Header
+export default withAuthModal(Header)
 
 const Container = styled('header')(({ theme }) => ({
     position: 'fixed',

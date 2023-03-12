@@ -11,14 +11,16 @@ import {
     Paper,
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllOrder } from '../../store/order/order.thunk'
+import { getOrder } from '../../store/order/order.thunk'
 
-const Orders = () => {
+const AppLayout = () => {
     const dispatch = useDispatch()
+
     useEffect(() => {
-        dispatch(getAllOrder())
+        dispatch(getOrder())
     }, [])
-    const { allOrders } = useSelector((state) => state.orders)
+    const { orders } = useSelector((state) => state.orders)
+
     return (
         <StyledTableContainer component={Paper} sx={{ maxHeight: '300px' }}>
             <Table aria-label="simple table" stickyHeader>
@@ -30,7 +32,7 @@ const Orders = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {allOrders.map((item) =>
+                    {orders.map((item) =>
                         item.items.map((meal) => (
                             <TableRow
                                 key={meal.id}
@@ -54,7 +56,7 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default AppLayout
 
 const StyledTableContainer = styled(TableContainer)(() => ({
     marginTop: '60px',

@@ -10,7 +10,6 @@ const Snackbar = ({ isOpen, onClose, message, severity, autoHideDuration }) => {
                 onClose={onClose}
                 message="Note archived"
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                // action={action}
             >
                 <Alert
                     onClose={onClose}

@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import AdminLayout from '../layout/AdminLayout'
+import AppLayout from '../pages/user/AppLayout'
 import UserLayout from '../layout/UserLayout'
 import { UserRoles } from '../lib/constants/common'
 import { Meals as AdminMeals } from '../pages/admin/meals/Meals'
@@ -73,7 +74,20 @@ export const AppRoutes = () => {
                         />
                     }
                 />
+                <Route
+                    path="orderfood"
+                    element={
+                        <ProtectedRoute
+                            isAllowed={isAllowed([UserRoles.USER])}
+                            fallBackPath={
+                                role === UserRoles.ADMIN ? '/admin/meals' : '/'
+                            }
+                            component={AppLayout}
+                        />
+                    }
+                />
             </Route>
+
             <Route
                 path="/admin"
                 element={
@@ -94,6 +108,7 @@ export const AppRoutes = () => {
                         />
                     }
                 />
+
                 <Route
                     path="orders"
                     element={
